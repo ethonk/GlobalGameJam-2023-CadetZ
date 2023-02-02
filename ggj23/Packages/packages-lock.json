@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.febucci.custom-hierarchy": {
-      "version": "https://github.com/febucci/unitypackage-custom-hierarchy.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "093baf4e09c2cd21c284303a977ec112a43041a7"
-    },
     "com.unity.burst": {
       "version": "1.7.3",
       "depth": 1,
@@ -33,7 +26,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.16",
+      "version": "3.0.18",
       "depth": 0,
       "source": "registry",
       "dependencies": {
