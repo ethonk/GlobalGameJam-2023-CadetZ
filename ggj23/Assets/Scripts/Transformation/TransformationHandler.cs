@@ -17,6 +17,10 @@ public class TransformationHandler : MonoBehaviour
     [SerializeField] private float cavemanDecayRate = 0.01f;
     [SerializeField] private float cavemanRestoreRate = 2f;
 
+    [Header("Player Prefabs")]
+    [SerializeField] private Transform plrOrangutan;
+    [SerializeField] private Transform plrCaveman;
+
     private void Start()
     {
         cavemanDecayCurr = cavemanDecayRate;
@@ -38,6 +42,13 @@ public class TransformationHandler : MonoBehaviour
             transformationState = TransformationState.Chimpanzee;
 
             cavemanDecayCurr = cavemanDecayRate;
+            
+            // spawn orangutan at caveman
+            var origPlayer = FindObjectOfType<PlayerDetails>().transform;
+            var newOrangutan = Instantiate(plrOrangutan, null);
+            newOrangutan.position = origPlayer.position;
+            // delete existing caveman
+            Destroy(origPlayer.gameObject);
         }
     }
 
@@ -71,6 +82,13 @@ public class TransformationHandler : MonoBehaviour
             
             transformationState = TransformationState.Caveman;
             cavemanDecayCurr = cavemanDecayRate;
+            
+            // spawn caveman at orangutan
+            var origPlayer = FindObjectOfType<PlayerDetails>().transform;
+            var newCaveman = Instantiate(plrCaveman, null);
+            newCaveman.position = origPlayer.position;
+            // delete existing orangutan
+            Destroy(origPlayer.gameObject);
         }
     }
 
