@@ -12,15 +12,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01270efd3285ea4a9d6c555cb0a8027, type: 3}
   m_Name: VFXUI
   m_EditorClassIdentifier: 
-  groupInfos: []
+  groupInfos:
+  - title: base
+    position:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 100
+      height: 100
+    contents:
+    - model: {fileID: 8926484042661614672}
+      id: 1
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614684}
+      id: 2
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614686}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614689}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614694}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614785}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614788}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614806}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614731}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614821}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614733}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614736}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614837}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614737}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614740}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614742}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614747}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661614817}
+      id: 0
+      isStickyNote: 0
   stickyNoteInfos: []
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -1110
-    y: -55
-    width: 6345
-    height: 2502
+    x: -1135
+    y: -114
+    width: 6370
+    height: 2554
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1171,7 +1233,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614591}
   - {fileID: 8926484042661614678}
   - {fileID: 8926484042661614593}
-  m_UIPosition: {x: 614, y: 1690}
+  m_UIPosition: {x: 644, y: 1683}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1589,7 +1651,7 @@ MonoBehaviour:
   positionMode: 0
   spawnMode: 0
   mode: 1
-  placementMode: 0
+  placementMode: 2
   surfaceCoordinates: 1
   sourceMesh: 1
 --- !u!114 &8926484042661614601
@@ -2424,7 +2486,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 210, y: 969}
+  m_UIPosition: {x: 205, y: 963}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -5388,7 +5450,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.TArcSphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":1.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":3.5},"arc":6.2831854820251469}'
+      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":1.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":4.380000114440918},"arc":6.2831854820251469}'
     m_Space: 0
   m_Property:
     name: arcSphere
@@ -6997,7 +7059,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.5,"y":2.0,"z":0.5}'
+      m_SerializableObject: '{"x":1.0,"y":2.0,"z":0.5}'
     m_Space: 2147483647
   m_Property:
     name: Scale
@@ -7209,7 +7271,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615172}
   - {fileID: 8926484042661615174}
   - {fileID: 8926484042661615179}
-  m_UIPosition: {x: 1100, y: 1334}
+  m_UIPosition: {x: 1064, y: 1500}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -7429,7 +7491,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 7
     m_Space: 2147483647
   m_Property:
     name: A
@@ -7463,7 +7525,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.5
+      m_SerializableObject: 6
     m_Space: 2147483647
   m_Property:
     name: B
@@ -8693,7 +8755,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.8
+      m_SerializableObject: 0.75
     m_Space: 2147483647
   m_Property:
     name: A
@@ -8727,7 +8789,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.2
+      m_SerializableObject: 0.5
     m_Space: 2147483647
   m_Property:
     name: B
@@ -9337,7 +9399,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.05
+      m_SerializableObject: 0.78
     m_Space: 2147483647
   m_Property:
     name: _fresnenPower
@@ -9572,7 +9634,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.3
+      m_SerializableObject: 1
     m_Space: 2147483647
   m_Property:
     name: A
@@ -16491,7 +16553,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661615708}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
 --- !u!114 &8926484042661615708
 MonoBehaviour:
   m_ObjectHideFlags: 0
