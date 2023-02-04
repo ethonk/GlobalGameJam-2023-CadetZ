@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,6 +15,14 @@ public class LargeProjectileThrow : MonoBehaviour
     public enum ThrowState { Empty, Picking, Picked }
     [SerializeField] private ThrowState throwState = ThrowState.Empty;
     [SerializeField] private float throwSpeed = 3f;
+
+    // references
+    private PlayerDetails _playerDetails;
+
+    private void Start()
+    {
+        _playerDetails = FindObjectOfType<PlayerDetails>();
+    }
 
     private void Update()
     {
@@ -39,6 +48,9 @@ public class LargeProjectileThrow : MonoBehaviour
         // set and parent obj
         heldProjectile = obj;
         heldProjectile.SetParent(holdPoint);
+        
+        // play animation
+        _playerDetails.playerAnimator.SetBool("HoldingItem", true);
     }
 
     private void ProcessPick()
@@ -79,5 +91,13 @@ public class LargeProjectileThrow : MonoBehaviour
         
         // at the end, set held projectile to null
         heldProjectile = null;
+        
+        //
+        // ANIMATION
+        //
+        
+        // play animation
+        _playerDetails.playerAnimator.SetTrigger("Throw");
+        _playerDetails.playerAnimator.SetBool("HoldingItem", false);
     }
 }

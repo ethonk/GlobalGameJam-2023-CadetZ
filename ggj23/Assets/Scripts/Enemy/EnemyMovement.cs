@@ -15,8 +15,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        if (player == null) return;
-
+        if (player == null) player = FindObjectOfType<PlayerDetails>().transform;
         agent.destination = player.position;
     }
 }
