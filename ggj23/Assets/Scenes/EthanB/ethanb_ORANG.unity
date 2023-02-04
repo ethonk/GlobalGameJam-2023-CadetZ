@@ -603,6 +603,8 @@ MonoBehaviour:
   cavemanDecayCurr: 0
   cavemanDecayRate: 1.005
   cavemanRestoreRate: 3
+  plrOrangutan: {fileID: 0}
+  plrCaveman: {fileID: 0}
 --- !u!1 &285991251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,7 +2118,7 @@ Transform:
   m_GameObject: {fileID: 913661858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.125, y: 3.625, z: 8.25}
-  m_LocalScale: {x: 3.0199163, y: 1.25, z: 2}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 794404790}
@@ -2171,7 +2173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ef51a6af85f20944ba6186f7018ba79, type: 2}
+  - {fileID: 5561349426305759274, guid: 77f35aa608cac2249a1a81899984ef13, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2200,7 +2202,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913661858}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -2794746954737661817, guid: 77f35aa608cac2249a1a81899984ef13, type: 3}
 --- !u!1 &921757227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,6 +2646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29456f3769f8e8c4ea865fa151c21923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwCount: 0
+  throwCooldown: 0
+  throwForce: 10
+  throwUpwardForce: 0.5
   aiming: 0
   aimedTowards: {x: 0, y: 0, z: 0}
   projectilePrefab: {fileID: 0}
@@ -2677,7 +2683,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 1
   meleeHitboxUptime: 0.2
-  heldProjectile: {fileID: 0}
+  projectileThrowPoint: {fileID: 0}
+  isChimpanzee: 0
 --- !u!54 &1395917645
 Rigidbody:
   m_ObjectHideFlags: 0
