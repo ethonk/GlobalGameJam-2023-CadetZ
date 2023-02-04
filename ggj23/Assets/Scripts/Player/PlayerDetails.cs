@@ -9,6 +9,7 @@ public class PlayerDetails : MonoBehaviour
 
     [Header("Holster")]
     public Transform heldProjectile;
+    public Transform projectileThrowPoint;
 
     // references
     private PlayerAttack _meleeAtkHandler;

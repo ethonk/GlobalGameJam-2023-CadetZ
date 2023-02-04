@@ -2,18 +2,28 @@ using UnityEngine;
 
 public class PlayerRangedAttack : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private int throwCount;
+    [SerializeField] private float throwCooldown;
+    [SerializeField] private float throwForce = 10f;
+    [SerializeField] private float throwUpwardForce = 0.5f;
+
     [Header("States")]
     public bool aiming;
-    [SerializeField] private Vector3 aimedTowards;
+    public Vector3 aimedTowards;
 
     [Header("References")]
     [SerializeField] private Transform projectilePrefab;
     
     // reference to the movement functionality
+    private PlayerDetails _playerDetails;
     private IsoMovement _movementHandler;
+    // private states
+    private bool _canThrow = true;
 
     private void Start()
     {
+        _playerDetails = GetComponent<PlayerDetails>();
         _movementHandler = GetComponent<IsoMovement>();
     }
 
@@ -39,6 +49,26 @@ public class PlayerRangedAttack : MonoBehaviour
     
     private void FireProjectile()
     {
+        if (!_canThrow) return;
         
+        // create thrown object
+        var newProjectile = Instantiate(projectilePrefab, null, true);
+        newProjectile.position = _playerDetails.projectileThrowPoint.position;
+        
+        // get the rigidbody and calculate its force
+        Rigidbody newProjectileRb = newProjectile.GetComponent<Rigidbody>();
+        Vector3 newThrowForce = (_movementHandler.playerModel.position + transform.forward) * 
+            throwForce;
+        newThrowForce.y = 0;
+        
+        // apply force
+        newProjectileRb.AddForce(newThrowForce, ForceMode.Impulse);
+
+        Invoke(nameof(ResetThrow), throwCooldown);
+    }
+
+    private void ResetThrow()
+    {
+        _canThrow = true;
     }
 }
