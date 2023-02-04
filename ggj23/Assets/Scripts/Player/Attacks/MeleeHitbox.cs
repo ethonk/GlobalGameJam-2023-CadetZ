@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class MeleeHitbox : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private PlayerAttack meleeAttackHandler;
+    
     private void OnTriggerEnter(Collider other)
     {
         // destroy the enemy
@@ -11,5 +14,8 @@ public class MeleeHitbox : MonoBehaviour
         
         // run award kill
         GameManager.Instance.AwardKill();
+        
+        // run reset for melee attacks
+        meleeAttackHandler.killedWithAttack = true;
     }
 }
