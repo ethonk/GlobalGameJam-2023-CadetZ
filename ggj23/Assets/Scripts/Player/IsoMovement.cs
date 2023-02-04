@@ -18,7 +18,7 @@ public class IsoMovement : MonoBehaviour
     public bool aimInfluenced;
 
     [Header("References")]
-    [SerializeField] private Transform playerModel;
+    public Transform playerModel;
 
     [Header("VFX")]
     [SerializeField] private TrailRenderer dashTrail;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 82fcb49d1e0b08d4989cff6821d638a1
+guid: bfae55890186d2f4697e38614e130644
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Activate
+      name: Melee_Right
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -66,7 +66,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
