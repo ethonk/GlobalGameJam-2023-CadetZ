@@ -51,7 +51,7 @@ MonoBehaviour:
   heldProjectile: {fileID: 0}
   pickSpeed: 5
   throwState: 0
-  throwSpeed: 3
+  throwSpeed: 10
 --- !u!1 &4494968088144162178
 GameObject:
   m_ObjectHideFlags: 0

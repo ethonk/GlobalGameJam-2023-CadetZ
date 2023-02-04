@@ -32,7 +32,8 @@ public class LargeProjectileThrow : MonoBehaviour
 
         // pick
         if (Input.GetMouseButtonDown(1) && throwState == ThrowState.Empty &&
-            hitBox.largeProjectilesInRange.Count > 0)
+            hitBox.largeProjectilesInRange.Count > 0 && 
+                !hitBox.largeProjectilesInRange[0].GetComponent<ProjectileScript>().airborne)
             Pick(hitBox.TakeFromList());
         
         // throw
@@ -49,10 +50,9 @@ public class LargeProjectileThrow : MonoBehaviour
         // set and parent obj
         heldProjectile = obj;
         heldProjectile.SetParent(holdPoint);
-        
-        // if there is a rigid body, delete it
-        if (heldProjectile.GetComponent<Rigidbody>() != null)
-            Destroy(heldProjectile.GetComponent<Rigidbody>());
+
+        // set to airborne
+        heldProjectile.GetComponent<ProjectileScript>().airborne = true;
         
         // play animation
         _playerDetails.playerAnimator.SetBool("HoldingItem", true);
