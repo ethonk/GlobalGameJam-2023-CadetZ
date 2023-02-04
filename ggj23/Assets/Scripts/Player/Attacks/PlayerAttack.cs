@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     public bool canAttack = true;
     
     // 
+    private PlayerDetails _playerDetails;
     private IsoMovement _movementHandler;
     //
     private float _attackCooldown;
@@ -27,12 +28,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        var plrDetails = GetComponent<PlayerDetails>();
+        _playerDetails = GetComponent<PlayerDetails>();
 
         _movementHandler = GetComponent<IsoMovement>();
         
-        _attackCooldown = plrDetails.attackDelay;
-        _hitboxUptime = plrDetails.meleeHitboxUptime;
+        _attackCooldown = _playerDetails.attackDelay;
+        _hitboxUptime = _playerDetails.meleeHitboxUptime;
         
         hitBox.gameObject.SetActive(false);
     }
@@ -130,5 +131,19 @@ public class PlayerAttack : MonoBehaviour
         // activate hit box
         hitBox.gameObject.SetActive(true);
         _hitboxActive = true;
-        }
+        
+        //
+        // ANIMATION
+        //
+
+        // only if animator
+        if (_playerDetails.playerAnimator == null) return;
+        
+        // roll for a random swing animation
+        int rand = UnityEngine.Random.Range(0, 2);
+        
+        // play animation accordingly
+        if (rand == 0) _playerDetails.playerAnimator.SetTrigger("MeleeLeft");
+        else _playerDetails.playerAnimator.SetTrigger("MeleeRight");
+    }
 }

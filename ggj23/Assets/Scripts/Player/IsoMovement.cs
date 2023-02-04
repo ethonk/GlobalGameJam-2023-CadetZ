@@ -25,8 +25,8 @@ public class IsoMovement : MonoBehaviour
     
     // values / references
     private Vector3 _forward, _right;   // augmented forward and right for iso
-    private Rigidbody _rb;
     private Camera _mainCam;
+    private PlayerDetails _playerDetails;
     public int raycastLayer;
 
     [SerializeField] private Vector3 dashToPosition;
@@ -38,8 +38,8 @@ public class IsoMovement : MonoBehaviour
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
         _mainCam = Camera.main;
+        _playerDetails = GetComponent<PlayerDetails>();
         
         raycastLayer = LayerMask.GetMask("AimCollision");
         
@@ -66,6 +66,8 @@ public class IsoMovement : MonoBehaviour
         
         // move on input
         if (Input.anyKey) Move();
+        else if (_playerDetails.playerAnimator != null)
+            _playerDetails.playerAnimator.SetBool("Moving", false);
         
         // process dash
         ProcessDash();
@@ -148,6 +150,10 @@ public class IsoMovement : MonoBehaviour
         // Smoothly move the new position
         transform.forward = heading;
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
+        
+        // Play animation
+        if (_playerDetails.playerAnimator != null)
+            _playerDetails.playerAnimator.SetBool("Moving", true);
     }
 
     private void Look()

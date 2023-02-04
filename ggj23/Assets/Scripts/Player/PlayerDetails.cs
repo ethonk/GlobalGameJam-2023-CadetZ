@@ -7,6 +7,9 @@ public class PlayerDetails : MonoBehaviour
     public float attackDelay = 1.0f;
     public float meleeHitboxUptime = 0.2f;
 
+    [Header("Animator")]
+    public Animator playerAnimator;
+
     [Header("Holster")]
     public Transform projectileThrowPoint;
 

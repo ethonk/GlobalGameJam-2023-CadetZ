@@ -416,11 +416,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transformationState: 0
   chimpanzeeCurr: 0
-  chimpanzeeMax: 1
+  chimpanzeeMax: 3
   cavemanCurr: 0
   cavemanMax: 100
   cavemanDecayCurr: 0
-  cavemanDecayRate: 1.005
+  cavemanDecayRate: 1.01
   cavemanRestoreRate: 3
   plrOrangutan: {fileID: 5055771676055688858, guid: ffc3d24994b5b80448b8c80a2467da43,
     type: 3}
