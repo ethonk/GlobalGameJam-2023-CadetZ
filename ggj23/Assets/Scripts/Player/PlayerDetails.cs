@@ -8,10 +8,10 @@ public class PlayerDetails : MonoBehaviour
     public float meleeHitboxUptime = 0.2f;
 
     [Header("Holster")]
-    public Transform heldProjectile;
     public Transform projectileThrowPoint;
 
     // references
+    public bool isChimpanzee;
     private PlayerAttack _meleeAtkHandler;
     private PlayerRangedAttack _rangeAtkHandler;
 
@@ -23,7 +23,7 @@ public class PlayerDetails : MonoBehaviour
 
     private void Update()
     {
-        UpdateCursor();
+        if (isChimpanzee) UpdateCursor();
     }
 
     void UpdateCursor()
