@@ -9,15 +9,14 @@ public class PlayerRangedAttack : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private CursorManager cursorManager;
+    [SerializeField] private Transform projectilePrefab;
     
     // reference to the movement functionality
     private IsoMovement _movementHandler;
-    private Camera _mainCam;
 
     private void Start()
     {
         _movementHandler = GetComponent<IsoMovement>();
-        _mainCam = Camera.main;
     }
 
     private void Update()
@@ -27,11 +26,10 @@ public class PlayerRangedAttack : MonoBehaviour
             SetAiming(true);
 
         else if (Input.GetMouseButtonUp(1) && aiming)
+        {
+            FireProjectile();
             SetAiming(false);
-
-        // run aim
-        if (aiming) 
-            Aim();
+        }
     }
 
     private void SetAiming(bool _aiming)
@@ -47,7 +45,7 @@ public class PlayerRangedAttack : MonoBehaviour
             cursorManager.CursorToNormal();
     }
     
-    private void Aim()
+    private void FireProjectile()
     {
         
     }
