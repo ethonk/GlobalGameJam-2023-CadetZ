@@ -360,13 +360,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e2dd8699a829a48b221b4e2c0ebaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashStaggerTime: 0.3
   hitBox: {fileID: 5768873003109475460}
-  _attackCooldown: 0
-  _hitboxUptime: 0
-  _canAttack: 1
-  _hitboxActive: 0
-  _currAttackTimer: 0
-  _currHitboxUptime: 0
+  killedWithAttack: 0
+  canAttack: 1
 --- !u!114 &6338730634704045932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29456f3769f8e8c4ea865fa151c21923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiming: 0
+  aimedTowards: {x: 0, y: 0, z: 0}
+  projectilePrefab: {fileID: 0}
 --- !u!114 &5768873002587791640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +393,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   turnSpeed: 720
+  moveSpeed: 5
+  dashSpeed: 15
+  dashStep: 10
+  dashing: 0
+  encumbered: 0
+  encumberedCooldown: 0
   aimInfluenced: 0
+  playerModel: {fileID: 0}
+  dashTrail: {fileID: 0}
+  raycastLayer: 0
+  dashToPosition: {x: 0, y: 0, z: 0}
 --- !u!33 &5768873002587791646
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -401,7 +411,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5768873002587791618}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 2586283164047265435, guid: aaeebe3d760fd4c43a5ce0e523c4dfca, type: 3}
 --- !u!23 &5768873002587791645
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -422,7 +432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c655c790862637245a679646a6267503, type: 2}
+  - {fileID: 7858710100553594506, guid: aaeebe3d760fd4c43a5ce0e523c4dfca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -630,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2346cc4521afc4d98f0fcbf9199d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeAttackHandler: {fileID: 0}
 --- !u!33 &5768873003109475463
 MeshFilter:
   m_ObjectHideFlags: 0
