@@ -422,7 +422,7 @@ MonoBehaviour:
   cavemanDecayCurr: 0
   cavemanDecayRate: 1.005
   cavemanRestoreRate: 3
-  plrOrangutan: {fileID: 5768873002587791619, guid: 6007f128055c32147838c98367e3f510,
+  plrOrangutan: {fileID: 5055771676055688858, guid: ffc3d24994b5b80448b8c80a2467da43,
     type: 3}
   plrCaveman: {fileID: 8087466246368531731, guid: cf1444fa797e2624191f02a501da20f6,
     type: 3}
@@ -2979,11 +2979,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_Chimpanzee
-      objectReference: {fileID: 0}
-    - target: {fileID: 5055771676055688853, guid: ffc3d24994b5b80448b8c80a2467da43,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5055771676055688858, guid: ffc3d24994b5b80448b8c80a2467da43,
         type: 3}

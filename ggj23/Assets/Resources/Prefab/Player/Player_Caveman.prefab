@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5963922721736506857}
+  - component: {fileID: 2098599449319476926}
   - component: {fileID: 8136102744951325292}
   - component: {fileID: 194029177941467720}
   - component: {fileID: 6740429477650320052}
@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8087466246368531731}
-  m_RootOrder: 4
+  m_Father: {fileID: 8087466247781308852}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &8136102744951325292
 VisualEffect:
@@ -248,7 +248,7 @@ Transform:
   m_Children:
   - {fileID: 8087466247116938890}
   m_Father: {fileID: 8087466246368531731}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8087466246368531740
 GameObject:
@@ -286,9 +286,7 @@ Transform:
   - {fileID: 8087466247781308852}
   - {fileID: 8087466245710568627}
   - {fileID: 8087466246686193619}
-  - {fileID: 5210519226367351359}
   - {fileID: 8087466246150392945}
-  - {fileID: 5963922721736506857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -307,6 +305,7 @@ MonoBehaviour:
   attackDelay: 2
   meleeHitboxUptime: 0.55
   projectileThrowPoint: {fileID: 8087466245650539731}
+  isChimpanzee: 0
 --- !u!114 &8087466246368531728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +899,7 @@ Transform:
   m_Children:
   - {fileID: 8087466245650539731}
   - {fileID: 8195016959603599393}
+  - {fileID: 2098599449319476926}
   m_Father: {fileID: 8087466246368531731}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
