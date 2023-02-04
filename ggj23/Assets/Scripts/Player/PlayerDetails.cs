@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerDetails : MonoBehaviour
@@ -8,4 +9,31 @@ public class PlayerDetails : MonoBehaviour
 
     [Header("Holster")]
     public Transform heldProjectile;
+
+    // references
+    private PlayerAttack _meleeAtkHandler;
+    private PlayerRangedAttack _rangeAtkHandler;
+
+    private void Start()
+    {
+        _meleeAtkHandler = GetComponent<PlayerAttack>();
+        _rangeAtkHandler = GetComponent<PlayerRangedAttack>();
+    }
+
+    private void Update()
+    {
+        UpdateCursor();
+    }
+
+    void UpdateCursor()
+    {
+        if (_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
+            CursorManager.Instance.CursorToNormal();
+        
+        else if (!_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
+            CursorManager.Instance.CursorToNormalCd();
+        
+        else if (_rangeAtkHandler.aiming)
+            CursorManager.Instance.CursorToAim();
+    }
 }

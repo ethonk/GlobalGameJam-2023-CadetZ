@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class IsoMovement : MonoBehaviour
@@ -6,30 +7,56 @@ public class IsoMovement : MonoBehaviour
     public float speed = 5f;
     public float turnSpeed = 360f;
 
+    public float moveSpeed = 5f;
+    public float dashSpeed = 15f;
+    public float dashStep = 10f;
+
     [Header("States")]
+    public bool dashing;
+    public bool encumbered;             // if true, dont allow to move
+    public float encumberedCooldown;    // always changing
     public bool aimInfluenced;
 
     [Header("References")]
     [SerializeField] private Transform playerModel;
+
+    [Header("VFX")]
+    [SerializeField] private TrailRenderer dashTrail;
     
     // values / references
     private Vector3 _forward, _right;   // augmented forward and right for iso
     private Rigidbody _rb;
     private Camera _mainCam;
-    private int _raycastLayer;
+    public int raycastLayer;
+
+    [SerializeField] private Vector3 dashToPosition;
+    
+    // cooldowns
+    private float _currDashDuration;
+    private float _currEncumberedCooldown;
+    
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _mainCam = Camera.main;
         
-        _raycastLayer = LayerMask.GetMask("AimCollision");
+        raycastLayer = LayerMask.GetMask("AimCollision");
         
         // setup isometric values
         _forward = _mainCam.transform.forward;
         _forward.y = 0;
         _forward = Vector3.Normalize(_forward);
         _right = Quaternion.Euler(new Vector3(0, 90, 0)) * _forward;
+        
+        // set initial movement values
+        turnSpeed = moveSpeed;
+    }
+
+    private void Update()
+    {
+        // process the encumbered cooldown
+        ProcessEncumberCooldown();
     }
 
     private void FixedUpdate()
@@ -39,10 +66,75 @@ public class IsoMovement : MonoBehaviour
         
         // move on input
         if (Input.anyKey) Move();
+        
+        // process dash
+        ProcessDash();
     }
 
+
+    public void Dash()
+    {
+        // set to dashing, but ignore if already dashing to avoid exploit
+        if (dashing) return;
+        
+        // set dash position desired to (x) paces 
+        dashToPosition = transform.position + (transform.forward * dashStep);
+
+        // set to dashing
+        dashing = true;
+        
+        // enable VFX
+        dashTrail.emitting = true;
+    }
+
+    private void ProcessDash()
+    {
+        if (!dashing) return;
+
+        // move towards
+        transform.position = Vector3.MoveTowards(transform.position, dashToPosition,
+            dashSpeed * Time.deltaTime);
+        
+        // if position is reached, set to not dashing
+        if (Vector3.Distance(transform.position, dashToPosition) <= 0.1f)
+        {
+            dashing = false;
+            
+            // disable VFX
+            dashTrail.emitting = false;
+        }
+    }
+    
+    public void Encumber(float cooldown)
+    {
+        encumberedCooldown = cooldown;
+        encumbered = true;
+    }
+
+    public void UnEncumber()
+    {
+        _currEncumberedCooldown = 0f;
+        encumbered = false;
+    }
+
+    private void ProcessEncumberCooldown()
+    {
+        if (!encumbered) return;
+
+        _currEncumberedCooldown += Time.deltaTime;
+        if (_currEncumberedCooldown > encumberedCooldown)
+        {
+            _currEncumberedCooldown = 0;
+            encumbered = false;
+        }
+    }
+    
     private void Move()
     {
+        // don't move if encumbered!
+        if (encumbered) return;
+        
+        // calculate movement
         Vector3 rightMovement = _right * (speed * Input.GetAxis("Horizontal"));
         Vector3 forwardMovement = _forward * (speed * Input.GetAxis("Vertical"));
 
@@ -60,6 +152,8 @@ public class IsoMovement : MonoBehaviour
 
     private void Look()
     {
+        if (encumbered) return;
+        
         // if influenced by aim, look towards aim location
         if (aimInfluenced)
         {
@@ -67,7 +161,7 @@ public class IsoMovement : MonoBehaviour
             Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
         
             // attempt raycast
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, _raycastLayer))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, raycastLayer))
             {
                 // adjust the hit point to ignore the y-axis
                 Vector3 newHit = new Vector3(hit.point.x, transform.position.y, hit.point.z);

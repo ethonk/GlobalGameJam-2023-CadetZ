@@ -1,14 +1,12 @@
-using System;
 using UnityEngine;
 
 public class PlayerRangedAttack : MonoBehaviour
 {
     [Header("States")]
-    [SerializeField] private bool aiming;
+    public bool aiming;
     [SerializeField] private Vector3 aimedTowards;
 
     [Header("References")]
-    [SerializeField] private CursorManager cursorManager;
     [SerializeField] private Transform projectilePrefab;
     
     // reference to the movement functionality
@@ -37,12 +35,6 @@ public class PlayerRangedAttack : MonoBehaviour
         // set state to aiming
         aiming = _aiming;
         _movementHandler.aimInfluenced = _aiming;
-        
-        // set cursor
-        if (_aiming) 
-            cursorManager.CursorToAim();
-        else 
-            cursorManager.CursorToNormal();
     }
     
     private void FireProjectile()
