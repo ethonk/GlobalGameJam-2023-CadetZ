@@ -11,7 +11,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float spawnDelay = 0.5f;
 
     [Header("References")] 
-    [SerializeField] private EnemyMovement enemyPrefab;
+    [SerializeField] private Transform enemyPrefab;
+    [SerializeField] private Transform spawnPositionParent;
     [SerializeField] private List<Transform> spawnPositions;
     
     // private values
@@ -24,6 +25,12 @@ public class EnemyManager : MonoBehaviour
     {
         // find player
         _player = FindObjectOfType<PlayerDetails>().transform;
+        
+        // populate spawn positions
+        foreach (Transform child in spawnPositionParent)
+        {
+            spawnPositions.Add(child);
+        }
     }
 
     private void Update()
@@ -47,9 +54,6 @@ public class EnemyManager : MonoBehaviour
             // create and set position of the enemy
             var newEnemy = Instantiate(enemyPrefab, transform, true);
             newEnemy.transform.position = ChooseRandomSpawnPosition().position;
-            
-            // set enemy tracking to player
-            enemyPrefab.player = _player;
         }
     }
 
