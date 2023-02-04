@@ -55,8 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 1
   meleeHitboxUptime: 0.2
-  heldProjectile: {fileID: 0}
   projectileThrowPoint: {fileID: 5055771676779980634}
+  isChimpanzee: 1
 --- !u!114 &5055771676055688857
 MonoBehaviour:
   m_ObjectHideFlags: 0
