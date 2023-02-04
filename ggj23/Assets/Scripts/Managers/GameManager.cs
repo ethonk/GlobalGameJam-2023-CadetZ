@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        [Header("Events")]
+        [Header("Core Events")]
         [SerializeField] private UnityEvent onStart;
         [SerializeField] private UnityEvent onGameOver;
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent onKill;
 
         [Header("Variables")]
         [SerializeField] private GameState gameState = GameState.Start;
@@ -56,6 +60,17 @@ namespace Managers
         public void DebugLog(string msg)
         {
             print(msg);
+        }
+
+        public void GameOver()
+        {
+            UnityEngine.SceneManagement.SceneManager
+                .LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void AwardKill()
+        {
+            onKill.Invoke();
         }
     }
 }
