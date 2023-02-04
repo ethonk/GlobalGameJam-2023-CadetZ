@@ -16,30 +16,4 @@ public class PlayerDetails : MonoBehaviour
     [Header("References")]
     public bool isChimpanzee;
     public LargeProjectileThrow heavyThrow;
-    
-    private PlayerAttack _meleeAtkHandler;
-    private PlayerRangedAttack _rangeAtkHandler;
-
-    private void Start()
-    {
-        _meleeAtkHandler = GetComponent<PlayerAttack>();
-        _rangeAtkHandler = GetComponent<PlayerRangedAttack>();
-    }
-
-    private void Update()
-    {
-        if (isChimpanzee) UpdateCursor();
-    }
-
-    void UpdateCursor()
-    {
-        if (_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToNormal();
-        
-        else if (!_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToNormalCd();
-        
-        else if (_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToAim();
-    }
 }

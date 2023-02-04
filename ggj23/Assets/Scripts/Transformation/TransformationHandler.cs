@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class TransformationHandler : MonoBehaviour
@@ -42,6 +43,10 @@ public class TransformationHandler : MonoBehaviour
             transformationState = TransformationState.Chimpanzee;
 
             cavemanDecayCurr = cavemanDecayRate;
+            
+            // force the caveman to throw if it's holding something
+            var _throwHandler = FindObjectOfType<LargeProjectileThrow>();
+            if (_throwHandler.heldProjectile != null) _throwHandler.Throw();
             
             // spawn orangutan at caveman
             var origPlayer = FindObjectOfType<PlayerDetails>().transform;
@@ -89,6 +94,9 @@ public class TransformationHandler : MonoBehaviour
             newCaveman.position = origPlayer.position;
             // delete existing orangutan
             Destroy(origPlayer.gameObject);
+            
+            // screen shake
+            EffectsManager.Instance.Shake();
         }
     }
 

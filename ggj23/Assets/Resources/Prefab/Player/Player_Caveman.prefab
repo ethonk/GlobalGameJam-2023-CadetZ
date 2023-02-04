@@ -51,7 +51,7 @@ MonoBehaviour:
   heldProjectile: {fileID: 0}
   pickSpeed: 15
   throwState: 0
-  throwSpeed: 10
+  throwSpeed: 7.5
 --- !u!1 &4494968088144162178
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 2
-  meleeHitboxUptime: 0.55
+  meleeHitboxUptime: 0.3
   playerAnimator: {fileID: 625887175104327038}
   projectileThrowPoint: {fileID: 8087466245650539731}
   isChimpanzee: 0

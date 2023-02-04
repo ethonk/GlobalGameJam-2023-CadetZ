@@ -37,11 +37,14 @@ public class LargeProjectileThrow : MonoBehaviour
             // first, get random projectile
             var chosenProjectile = hitBox.GetClosestTransform();
 
-            // if it isn't airborne, pick it and remove it.
-            if (!chosenProjectile.GetComponent<ProjectileScript>().airborne)
+            if (chosenProjectile != null)
             {
-                Pick(chosenProjectile);
-                hitBox.TakeFromList(chosenProjectile);
+                // if it isn't airborne, pick it and remove it.
+                if (!chosenProjectile.GetComponent<ProjectileScript>().airborne)
+                {
+                    Pick(chosenProjectile);
+                    hitBox.TakeFromList(chosenProjectile);
+                }
             }
         }
 
@@ -60,9 +63,6 @@ public class LargeProjectileThrow : MonoBehaviour
         heldProjectile = obj;
         heldProjectile.SetParent(holdPoint);
 
-        // set to airborne
-        heldProjectile.GetComponent<ProjectileScript>().airborne = true;
-        
         // play animation
         _playerDetails.playerAnimator.SetBool("HoldingItem", true);
     }
@@ -123,8 +123,8 @@ public class LargeProjectileThrow : MonoBehaviour
         // get direction of player facing
         heldRb.AddForce(dir * throwSpeed, ForceMode.Impulse);
         
-        // at the end, set held projectile to null
-        heldProjectile = null;
+        // set to airborne
+        heldProjectile.GetComponent<ProjectileScript>().airborne = true;
         
         //
         // ANIMATION
@@ -133,5 +133,9 @@ public class LargeProjectileThrow : MonoBehaviour
         // play animation
         _playerDetails.playerAnimator.SetTrigger("Throw");
         _playerDetails.playerAnimator.SetBool("HoldingItem", false);
+        
+        // at the end, set held projectile to null and change the state
+        throwState = ThrowState.Empty;
+        heldProjectile = null;
     }
 }
