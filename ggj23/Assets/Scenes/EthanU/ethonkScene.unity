@@ -251,6 +251,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 151862936}
+  - {fileID: 2013295240}
   m_Father: {fileID: 1395917640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2470,7 +2471,7 @@ MonoBehaviour:
   turnSpeed: 120
   moveSpeed: 5
   dashSpeed: 17.5
-  dashStep: 2.5
+  dashStep: 3
   dashing: 0
   encumbered: 0
   encumberedCooldown: 0
@@ -2491,9 +2492,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29456f3769f8e8c4ea865fa151c21923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwCount: 0
+  throwCooldown: 0.1
+  throwForce: 10
+  throwUpwardForce: 0
   aiming: 0
   aimedTowards: {x: 0, y: 0, z: 0}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 6993687381363691034, guid: 27eaa3b594ebab54da758994a49ff114,
+    type: 3}
 --- !u!114 &1395917643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2506,7 +2512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e2dd8699a829a48b221b4e2c0ebaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashStaggerTime: 1
+  dashStaggerTime: 0.75
   hitBox: {fileID: 641272424}
   killedWithAttack: 0
   canAttack: 1
@@ -2525,6 +2531,7 @@ MonoBehaviour:
   attackDelay: 1
   meleeHitboxUptime: 0.2
   heldProjectile: {fileID: 0}
+  projectileThrowPoint: {fileID: 2013295240}
 --- !u!54 &1395917645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3675,6 +3682,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003706378}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2013295239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013295240}
+  m_Layer: 0
+  m_Name: ThrowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2013295240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013295239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 117526511}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2088520423
 GameObject:
   m_ObjectHideFlags: 0
