@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ public class LargeProjectileThrow : MonoBehaviour
     [SerializeField] private LargeProjectileHitbox hitBox;
 
     [Header("Held Projectile")]
-    [SerializeField] private Transform heldProjectile;
+    public Transform heldProjectile;
     [SerializeField] private float pickSpeed = 5f;
     
     public enum ThrowState { Empty, Picking, Picked }
@@ -18,10 +17,12 @@ public class LargeProjectileThrow : MonoBehaviour
 
     // references
     private PlayerDetails _playerDetails;
+    private IsoMovement _movementHandler;
 
     private void Start()
     {
         _playerDetails = FindObjectOfType<PlayerDetails>();
+        _movementHandler = transform.parent.GetComponent<IsoMovement>();
     }
 
     private void Update()
@@ -48,6 +49,10 @@ public class LargeProjectileThrow : MonoBehaviour
         // set and parent obj
         heldProjectile = obj;
         heldProjectile.SetParent(holdPoint);
+        
+        // if there is a rigid body, delete it
+        if (heldProjectile.GetComponent<Rigidbody>() != null)
+            Destroy(heldProjectile.GetComponent<Rigidbody>());
         
         // play animation
         _playerDetails.playerAnimator.SetBool("HoldingItem", true);
@@ -77,6 +82,28 @@ public class LargeProjectileThrow : MonoBehaviour
         heldProjectile.SetParent(null);
         
         //
+        // ROTATE PLAYER TO DIRECTION OF ATTACK
+        //
+        
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 dir = new Vector3();
+        
+        // attempt raycast
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _movementHandler.raycastLayer))
+        {
+            // adjust the hit point to ignore the y-axis
+            Vector3 newHit = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+
+            // using hit point, get direction
+            dir = (newHit - transform.position).normalized;
+            Quaternion look = Quaternion.LookRotation(dir);
+
+            // snap to rotation
+            _movementHandler.playerModel.rotation = look;
+        }
+        
+        //
         // PHYSICS PORTION
         //
         
@@ -85,7 +112,6 @@ public class LargeProjectileThrow : MonoBehaviour
         heldRb.constraints = RigidbodyConstraints.FreezeRotation;
         
         // get direction of player facing
-        Vector3 dir = transform.position + Vector3.forward;
         heldRb.AddForce(dir * throwSpeed, ForceMode.Impulse);
         
         

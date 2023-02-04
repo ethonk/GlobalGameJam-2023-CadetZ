@@ -95,6 +95,10 @@ public class PlayerAttack : MonoBehaviour
     {
         // ensure validity of the attack call
         if (!canAttack || _hitboxActive) return;
+        // if a caveman, make sure its not holding an object
+        if (!_playerDetails.isChimpanzee && _playerDetails.heavyThrow.heldProjectile != null)
+            return;
+        
         canAttack = false;
         
         //

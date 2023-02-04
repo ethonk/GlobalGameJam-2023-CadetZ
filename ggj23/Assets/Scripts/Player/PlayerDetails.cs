@@ -13,8 +13,10 @@ public class PlayerDetails : MonoBehaviour
     [Header("Holster")]
     public Transform projectileThrowPoint;
 
-    // references
+    [Header("References")]
     public bool isChimpanzee;
+    public LargeProjectileThrow heavyThrow;
+    
     private PlayerAttack _meleeAtkHandler;
     private PlayerRangedAttack _rangeAtkHandler;
 
