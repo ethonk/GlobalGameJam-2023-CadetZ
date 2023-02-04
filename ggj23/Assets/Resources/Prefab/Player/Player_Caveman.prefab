@@ -49,7 +49,7 @@ MonoBehaviour:
   holdPoint: {fileID: 7410612037242674968}
   hitBox: {fileID: 3054549752598092890}
   heldProjectile: {fileID: 0}
-  pickSpeed: 5
+  pickSpeed: 15
   throwState: 0
   throwSpeed: 10
 --- !u!1 &4494968088144162178

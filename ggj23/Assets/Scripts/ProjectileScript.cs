@@ -16,24 +16,22 @@ public class ProjectileScript : MonoBehaviour
     {
         if (!other.CompareTag("AimCollision") || !airborne) return;
         
+        print("i've touched the floor brother.");
+        
         // set to not airborne
         airborne = false;
         
-        // remove rigid body
-        if (transform.GetChild(0).GetComponent<Rigidbody>() != null)
-            Destroy(transform.GetChild(0).GetComponent<Rigidbody>());
+        // destroy rigid body
+        Destroy(transform.GetComponent<Rigidbody>());
     }
     
     private void DetectEnemy(Collider other)
     {
         // when hitting an enemy and ONLY when airborne, kill them
-        if (!other.CompareTag("Enemy") && airborne) return;
+        if (!other.CompareTag("Enemy") || airborne) return;
         Destroy(other.gameObject);
         
         // call game manager to award player with kill
-        GameManager.Instance.AwardKill();
-        
-        // destroy the projectile
-        Destroy(gameObject);
+        GameManager.Instance.AwardKill(); ;
     }
 }

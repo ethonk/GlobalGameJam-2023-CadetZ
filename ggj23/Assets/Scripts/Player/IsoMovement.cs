@@ -152,8 +152,7 @@ public class IsoMovement : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
         
         // Play animation
-        if (_playerDetails.playerAnimator != null)
-            _playerDetails.playerAnimator.SetBool("Moving", true);
+        _playerDetails.playerAnimator.SetBool("Moving", true);
     }
 
     private void Look()

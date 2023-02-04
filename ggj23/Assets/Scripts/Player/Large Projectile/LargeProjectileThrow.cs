@@ -32,10 +32,19 @@ public class LargeProjectileThrow : MonoBehaviour
 
         // pick
         if (Input.GetMouseButtonDown(1) && throwState == ThrowState.Empty &&
-            hitBox.largeProjectilesInRange.Count > 0 && 
-                !hitBox.largeProjectilesInRange[0].GetComponent<ProjectileScript>().airborne)
-            Pick(hitBox.TakeFromList());
-        
+            hitBox.largeProjectilesInRange.Count > 0)
+        {
+            // first, get random projectile
+            var chosenProjectile = hitBox.GetClosestTransform();
+
+            // if it isn't airborne, pick it and remove it.
+            if (!chosenProjectile.GetComponent<ProjectileScript>().airborne)
+            {
+                Pick(chosenProjectile);
+                hitBox.TakeFromList(chosenProjectile);
+            }
+        }
+
         // throw
         if (Input.GetMouseButtonDown(0) && throwState == ThrowState.Picked)
             Throw();
@@ -113,7 +122,6 @@ public class LargeProjectileThrow : MonoBehaviour
         
         // get direction of player facing
         heldRb.AddForce(dir * throwSpeed, ForceMode.Impulse);
-        
         
         // at the end, set held projectile to null
         heldProjectile = null;
