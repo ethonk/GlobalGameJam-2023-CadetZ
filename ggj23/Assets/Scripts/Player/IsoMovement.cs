@@ -8,6 +8,9 @@ public class IsoMovement : MonoBehaviour
 
     [Header("States")]
     public bool aimInfluenced;
+
+    [Header("References")]
+    [SerializeField] private Transform playerModel;
     
     // values / references
     private Vector3 _forward, _right;   // augmented forward and right for iso
@@ -32,20 +35,10 @@ public class IsoMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // process look
-        if (aimInfluenced) LookAimInfluenced();
-
+        Look();
+        
         // move on input
-        if (aimInfluenced)
-        {
-            if (Input.GetKey(KeyCode.W)) MoveAimInfluenced();
-            if (Input.GetKey(KeyCode.S)) MoveAimInfluenced(-1f);
-            if (Input.GetKey(KeyCode.A)) MoveAimInfluenced(-1f, false);
-            if (Input.GetKey(KeyCode.D)) MoveAimInfluenced(1f, false);
-        }
-        else if (Input.anyKey)
-        {
-            Move();
-        }
+        if (Input.anyKey) Move();
     }
 
     private void Move()
@@ -64,32 +57,35 @@ public class IsoMovement : MonoBehaviour
         transform.forward = heading;
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
     }
-    
-    private void MoveAimInfluenced(float dir = 1f, bool vertical = true)
-    {
-        if (vertical)
-            _rb.MovePosition(transform.position + transform.forward * (dir * (speed * .75f * Time.deltaTime)));
-        else
-            _rb.MovePosition(transform.position + transform.right * (dir * (speed * .75f * Time.deltaTime)));
-    }
 
-    private void LookAimInfluenced()
+    private void Look()
     {
-        RaycastHit hit;
-        Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
-        
-        // attempt raycast
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, _raycastLayer))
+        // if influenced by aim, look towards aim location
+        if (aimInfluenced)
         {
-            // adjust the hit point to ignore the y-axis
-            Vector3 newHit = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            RaycastHit hit;
+            Ray ray = _mainCam.ScreenPointToRay(Input.mousePosition);
+        
+            // attempt raycast
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, _raycastLayer))
+            {
+                // adjust the hit point to ignore the y-axis
+                Vector3 newHit = new Vector3(hit.point.x, transform.position.y, hit.point.z);
 
-            // using hit point, get direction
-            Vector3 dir = (newHit - transform.position).normalized;
-            Quaternion look = Quaternion.LookRotation(dir);
+                // using hit point, get direction
+                Vector3 dir = (newHit - transform.position).normalized;
+                Quaternion look = Quaternion.LookRotation(dir);
 
-            // slerp to that rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, look,
+                // slerp to that rotation (only the model)
+                playerModel.rotation = Quaternion.Slerp(playerModel.rotation, look,
+                    turnSpeed * Time.deltaTime);
+            }
+        }
+
+        else
+        {
+            // slerp to that rotation (only the model)
+            playerModel.rotation = Quaternion.Slerp(playerModel.rotation, transform.rotation,
                 turnSpeed * Time.deltaTime);
         }
     }

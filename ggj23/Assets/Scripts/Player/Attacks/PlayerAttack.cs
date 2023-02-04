@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform hitBox;
 
     // 
+    private IsoMovement _movementHandler;
+    //
     private float _attackCooldown;
     private float _hitboxUptime;
     
@@ -21,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     {
         var plrDetails = GetComponent<PlayerDetails>();
 
+        _movementHandler = GetComponent<IsoMovement>();
+        
         _attackCooldown = plrDetails.attackDelay;
         _hitboxUptime = plrDetails.meleeHitboxUptime;
         
@@ -30,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         // attack key
-        if (Input.GetMouseButtonDown(0)) Attack();
+        if (Input.GetMouseButtonDown(0) && !_movementHandler.aimInfluenced) Attack();
 
         // managing the cooldown of the hitbox
         if (_hitboxActive)
