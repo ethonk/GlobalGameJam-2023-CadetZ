@@ -1,3 +1,4 @@
+using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -33,8 +34,21 @@ public class LargeProjectileThrow : MonoBehaviour
         // pick
         if (Input.GetMouseButtonDown(1) && throwState == ThrowState.Empty &&
             hitBox.largeProjectilesInRange.Count > 0)
-            Pick(hitBox.TakeFromList());
-        
+        {
+            // first, get random projectile
+            var chosenProjectile = hitBox.GetClosestTransform();
+
+            if (chosenProjectile != null)
+            {
+                // if it isn't airborne, pick it and remove it.
+                if (!chosenProjectile.GetComponent<ProjectileScript>().airborne)
+                {
+                    Pick(chosenProjectile);
+                    hitBox.TakeFromList(chosenProjectile);
+                }
+            }
+        }
+
         // throw
         if (Input.GetMouseButtonDown(0) && throwState == ThrowState.Picked)
             Throw();
@@ -49,13 +63,12 @@ public class LargeProjectileThrow : MonoBehaviour
         // set and parent obj
         heldProjectile = obj;
         heldProjectile.SetParent(holdPoint);
-        
-        // if there is a rigid body, delete it
-        if (heldProjectile.GetComponent<Rigidbody>() != null)
-            Destroy(heldProjectile.GetComponent<Rigidbody>());
-        
+
         // play animation
         _playerDetails.playerAnimator.SetBool("HoldingItem", true);
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/caveman_lift-1");
     }
 
     private void ProcessPick()
@@ -114,9 +127,8 @@ public class LargeProjectileThrow : MonoBehaviour
         // get direction of player facing
         heldRb.AddForce(dir * throwSpeed, ForceMode.Impulse);
         
-        
-        // at the end, set held projectile to null
-        heldProjectile = null;
+        // set to airborne
+        heldProjectile.GetComponent<ProjectileScript>().airborne = true;
         
         //
         // ANIMATION
@@ -125,5 +137,12 @@ public class LargeProjectileThrow : MonoBehaviour
         // play animation
         _playerDetails.playerAnimator.SetTrigger("Throw");
         _playerDetails.playerAnimator.SetBool("HoldingItem", false);
+        
+        // at the end, set held projectile to null and change the state
+        throwState = ThrowState.Empty;
+        heldProjectile = null;
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/caveman_throw-1");
     }
 }

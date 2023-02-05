@@ -33,10 +33,25 @@ public class LargeProjectileHitbox : MonoBehaviour
         return false;
     }
 
-    public Transform TakeFromList()
+    public Transform GetClosestTransform()
     {
-        var takenProjectile = largeProjectilesInRange[0];
-        largeProjectilesInRange.RemoveAt(0);
-        return takenProjectile;
+        foreach (Transform projectile in largeProjectilesInRange)
+        {
+            if (projectile != null) return projectile;
+        }
+
+        return null;
+    }
+    
+    public void TakeFromList(Transform projectile)
+    {
+        foreach (Transform p in largeProjectilesInRange)
+        {
+            if (p == projectile)
+            {
+                largeProjectilesInRange.Remove(p);
+                return;
+            }
+        }
     }
 }

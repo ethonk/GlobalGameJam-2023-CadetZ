@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class PlayerDetails : MonoBehaviour
@@ -10,36 +11,21 @@ public class PlayerDetails : MonoBehaviour
     [Header("Animator")]
     public Animator playerAnimator;
 
-    [Header("Holster")]
-    public Transform projectileThrowPoint;
-
     [Header("References")]
     public bool isChimpanzee;
     public LargeProjectileThrow heavyThrow;
-    
-    private PlayerAttack _meleeAtkHandler;
-    private PlayerRangedAttack _rangeAtkHandler;
+    public Transform dummy; // corpse
 
     private void Start()
     {
-        _meleeAtkHandler = GetComponent<PlayerAttack>();
-        _rangeAtkHandler = GetComponent<PlayerRangedAttack>();
-    }
-
-    private void Update()
-    {
-        if (isChimpanzee) UpdateCursor();
-    }
-
-    void UpdateCursor()
-    {
-        if (_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToNormal();
-        
-        else if (!_meleeAtkHandler.canAttack && !_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToNormalCd();
-        
-        else if (_rangeAtkHandler.aiming)
-            CursorManager.Instance.CursorToAim();
+        // transformation sounds
+        if (!isChimpanzee)
+        {
+            SoundManager.Instance.PlaySound("SFX/caveman_transform-1");
+            SoundManager.Instance.PlaySound("SFX/caveman_transform-2");
+            SoundManager.Instance.PlaySound("SFX/caveman_transform-3");
+        }
+        else 
+            SoundManager.Instance.PlaySound("SFX/orangu_transform");
     }
 }

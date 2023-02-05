@@ -6,8 +6,10 @@ public class SceneManager : MonoBehaviour
 {
     [SerializeField] private NavMeshSurface navMeshSurface;
 
+    /*
     private void Update()
     {
         navMeshSurface.BuildNavMesh();
     }
+    */
 }
