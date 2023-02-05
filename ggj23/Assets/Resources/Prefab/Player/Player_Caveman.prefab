@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8136102744951325292}
   - component: {fileID: 194029177941467720}
   - component: {fileID: 6740429477650320052}
-  - component: {fileID: 6575050912264489574}
+  - component: {fileID: 3070250787030993874}
   m_Layer: 0
   m_Name: transform_VFX
   m_TagString: Untagged
@@ -221,9 +221,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ExecuteInEditor: 1
   m_Bindings:
-  - {fileID: 6575050912264489574}
+  - {fileID: 3070250787030993874}
   m_VisualEffect: {fileID: 8136102744951325292}
---- !u!114 &6575050912264489574
+--- !u!114 &3070250787030993874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,11 +232,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5645216255539082379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdfea1f838247c40921a07afedde962, type: 3}
+  m_Script: {fileID: 11500000, guid: 07c3070554d0a8944a95ff8f018c2c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Property:
-    m_Name: Transform
+    m_Name: Position
   Target: {fileID: 3105311107956238921}
 --- !u!1 &5967650854561177120
 GameObject:
