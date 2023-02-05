@@ -1,3 +1,4 @@
+using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -65,6 +66,9 @@ public class LargeProjectileThrow : MonoBehaviour
 
         // play animation
         _playerDetails.playerAnimator.SetBool("HoldingItem", true);
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/caveman_lift-1");
     }
 
     private void ProcessPick()
@@ -137,5 +141,8 @@ public class LargeProjectileThrow : MonoBehaviour
         // at the end, set held projectile to null and change the state
         throwState = ThrowState.Empty;
         heldProjectile = null;
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/caveman_throw-1");
     }
 }

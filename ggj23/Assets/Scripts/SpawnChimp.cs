@@ -1,4 +1,4 @@
-using System;
+using Managers;
 using UnityEngine;
 
 public class SpawnChimp : MonoBehaviour
@@ -13,6 +13,9 @@ public class SpawnChimp : MonoBehaviour
     private void Start()
     {
         transform.position += new Vector3(0, startingY, 0);
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/chimp_vine");
     }
 
     private void Update()

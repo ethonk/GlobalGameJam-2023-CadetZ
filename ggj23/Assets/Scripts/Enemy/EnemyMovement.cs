@@ -6,7 +6,8 @@ public class EnemyMovement : MonoBehaviour
     public Transform player;
     
     private NavMeshAgent agent;
-    
+    private Vector3 lastPosition;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerDetails>().transform;

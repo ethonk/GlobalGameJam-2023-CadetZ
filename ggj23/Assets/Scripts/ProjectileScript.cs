@@ -24,6 +24,9 @@ public class ProjectileScript : MonoBehaviour
         
         // add screen shake
         EffectsManager.Instance.Shake();
+        
+        // play sound
+        SoundManager.Instance.PlaySound("SFX/caveman_transform-2");
     }
     
     private void DetectEnemy(Collider other)

@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace Managers
@@ -13,14 +16,15 @@ namespace Managers
         [SerializeField] private UnityEvent onKill;
 
         [Header("Variables")]
-        [SerializeField] private GameState gameState = GameState.Start;
+        [SerializeField] private GameState gameState = GameState.Menu;
+        public int score;
 
         // game manager instance
         private static GameManager _instance;
         public static GameManager Instance { get { return _instance; }}
         
         // game states
-        public enum GameState { Start, GameOver };
+        public enum GameState { Menu, Start, GameOver };
 
         /// <summary>
         /// Ensures that the Game Manager only ever exists once.
@@ -35,6 +39,16 @@ namespace Managers
             
             // then run the game state
             ChangeGameState(gameState);
+            
+            // if high score don't exist, make the key
+            if (!PlayerPrefs.HasKey("HighScore"))
+                PlayerPrefs.SetFloat("HighScore", 0);
+        }
+
+        private void Update()
+        {
+            if (gameState != GameState.Menu) return;
+            if (Input.GetKeyDown(KeyCode.Space)) ChangeGameState(GameState.Start);
         }
 
         public void ChangeGameState(GameState state)
@@ -63,13 +77,63 @@ namespace Managers
 
         public void GameOver()
         {
+            //
+            // 1) stop all AI
+            //
+            List<NavMeshAgent> allAi = new List<NavMeshAgent>(FindObjectsOfType<NavMeshAgent>());
+            foreach (NavMeshAgent agent in allAi)
+            {
+                Destroy(agent.GetComponent<EnemyMovement>());
+                agent.enabled = false;
+            }
+            
+            //
+            // 2) replace player with dummy
+            //
+            var plr = FindObjectOfType<PlayerDetails>();
+            
+            // instantiate dummy player
+            var dummy = Instantiate(plr.dummy, null, true);
+            dummy.transform.position = plr.transform.position;
+            
+            // delete real player
+            Destroy(plr.gameObject);
+
+            //
+            // 3) set high score and restart
+            //
+            
+            // compare high score
+            if (score > PlayerPrefs.GetFloat("HighScore"))
+                PlayerPrefs.SetFloat("HighScore", score);
+            
+            // restart scene
+            StartCoroutine(Restart());
+        }
+
+        private IEnumerator Restart()
+        {
+            yield return new WaitForSeconds(3f);
+            
             UnityEngine.SceneManagement.SceneManager
                 .LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
         public void AwardKill()
         {
+            score++;
             onKill.Invoke();
+            
+            // play sound
+            SoundManager.Instance.PlaySound("SFX/blood_splat");
+            
+            int randSound = UnityEngine.Random.Range(0, 4);
+            string soundToPlay = "SFX/chimp_death-" + (randSound + 1).ToString();
+            SoundManager.Instance.PlaySound(soundToPlay);
+            
+            
+            // use here to check for game over
+            
         }
     }
 }

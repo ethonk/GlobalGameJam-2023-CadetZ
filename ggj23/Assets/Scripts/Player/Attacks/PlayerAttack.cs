@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     // 
     private PlayerDetails _playerDetails;
     private IsoMovement _movementHandler;
+    private AttackCheck _attackCheck;
     //
     private float _attackCooldown;
     private float _hitboxUptime;
@@ -34,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
         
         _attackCooldown = _playerDetails.attackDelay;
         _hitboxUptime = _playerDetails.meleeHitboxUptime;
+        _attackCheck = FindObjectOfType<AttackCheck>();
         
         hitBox.gameObject.SetActive(false);
     }
@@ -99,6 +102,9 @@ public class PlayerAttack : MonoBehaviour
         if (!_playerDetails.isChimpanzee && _playerDetails.heavyThrow.heldProjectile != null)
             return;
         
+        // ensure that we are attacking from a valid position
+        if (_attackCheck.ListPopulated()) return;
+        
         canAttack = false;
         
         //
@@ -149,5 +155,12 @@ public class PlayerAttack : MonoBehaviour
         // play animation accordingly
         if (rand == 0) _playerDetails.playerAnimator.SetTrigger("MeleeLeft");
         else _playerDetails.playerAnimator.SetTrigger("MeleeRight");
+        
+        //
+        // SOUND
+        //
+        
+        if (_playerDetails.isChimpanzee) SoundManager.Instance.PlaySound("SFX/orangu_attack");
+        else SoundManager.Instance.PlaySound("SFX/caveman_attack");
     }
 }

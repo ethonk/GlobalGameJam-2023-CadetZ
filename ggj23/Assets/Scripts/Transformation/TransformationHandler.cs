@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TransformationHandler : MonoBehaviour
 {
-    private enum TransformationState { Chimpanzee, Caveman };
-    [SerializeField] private TransformationState transformationState;
+    public enum TransformationState { Chimpanzee, Caveman };
+    public TransformationState transformationState;
 
     [Header("Chimpanzee")]
     [SerializeField] private float chimpanzeeCurr;
