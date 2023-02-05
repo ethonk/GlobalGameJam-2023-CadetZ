@@ -83,8 +83,13 @@ namespace Managers
             List<NavMeshAgent> allAi = new List<NavMeshAgent>(FindObjectsOfType<NavMeshAgent>());
             foreach (NavMeshAgent agent in allAi)
             {
-                Destroy(agent.GetComponent<EnemyMovement>());
-                agent.enabled = false;
+                // start dance
+                var newDance = Instantiate(Resources.Load<Transform>("Prefab/Chimp_CollardGreens"),
+                    null, true);
+                newDance.position = agent.transform.position - new Vector3(0, .55f, 0);
+                
+                // kill agent
+                Destroy(agent.gameObject);
             }
             
             //
